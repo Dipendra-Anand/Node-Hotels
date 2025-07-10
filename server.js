@@ -7,10 +7,20 @@ const app=express();
 const bodyparser=require('body-parser');
 app.use(bodyparser.json())
 
+//middleware
+const logtime=(req,res,next)=>{
+    console.log(`[${new Date().toLocaleString()}] Request made to ${e=req.originalUrl}`);
+    next();
+    
+}
+
+app.use(logtime);
+
 //welcome page
 app.get('/',(req,res)=>{
     res.send("hello there! its my server");
 })
+
 
 //all routes
 const personroutes=require('./Routes/personroutes');
